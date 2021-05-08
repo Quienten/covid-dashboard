@@ -1,0 +1,26 @@
+body {
+    
+}
+
+.sidebar {
+    overflow-y: scroll;
+    height: 97vh;
+}
+
+.sidebar table {
+    width: 105%;
+}
+
+.map {
+    padding: 20px;
+    height: 97vh;
+}
+
+.big-case-count {
+    padding-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    min-height: 100px;
+    height: 100px;
+    text-align: center;
+}
