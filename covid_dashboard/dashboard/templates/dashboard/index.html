@@ -1,70 +1,63 @@
-<!DOCTYPE html>
+{% extends 'dashboard/layouts/base.html' %}
+
 {% load static %}
-<html>
-	<head>
-		<title>COVID Dashboard</title>
-		<link rel="icon" href="{% static 'dashboard/favicon.ico' %}" type="image/png" media="print" onload="this.media='all'"/>
-		<meta charset="utf-8">
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link rel="stylesheet" type="text/css" href="{% static 'dashboard/styles.css' %}">
-	</head>
-	<body>
-		<main>
-			<div class="row">
-				<div class="col-sm-3 col-md-4 sidebar">
-					<div class="big-case-count">
-						<h4>Global Cases:</h4>
-						<h2><b>{{big_case_num}}</b></h2>
-					</div>
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Country</th>
-								<th>Cases</th>
-								{% comment %} <th>Cases Per Capita</th>
-								<th>Death Count</th> {% endcomment %}
-							</tr>
-						</thead>
-						<tbody>
-							{% for country_name, case_count, case_count_per_capita, death_count in countries %}
-								<tr class="left-table-row">
-									<td><b>{{ country_name }}</b></td>
-									<td>{{ case_count }}</td>
-									{% comment %} <td>{{ case_count_per_capita }}</td>
-									<td>{{ death_count }}</td>
-									<td>{{ death_count_per_capita }}</td> {% endcomment %}
-								</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-				<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 header-text">
-					<h1 class="">COVID-19 Dashboard</h1>
-					<ul>
-						<li>HOME</li>
-						<li>ABOUT</li>
-						<li>FAQ</li>
-						<li>CONTACT</li>
-					</ul>
-					<div class="map-container">
-						<div class="card-body plotly worldmap">
-							<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.54.6/plotly.min.js"></script>
-							<div class="chart">
-								{% autoescape off %}
-								{{ world_map }}
-								{% endautoescape %}
-							</div>
-						</div>
+
+{% block title %} Home {% endblock title %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'dashboard/styles.css' %}">
+{% endblock stylesheets %}
+
+{% block content %}
+<main>
+	<div class="row">
+		<div class="col-sm-3 col-md-4 sidebar">
+			<div class="big-case-count">
+				<h4>Global Cases:</h4>
+				<h2><b>{{big_case_num}}</b></h2>
+			</div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Country</th>
+						<th>Cases</th>
+						{% comment %} <th>Cases Per Capita</th>
+						<th>Death Count</th> {% endcomment %}
+					</tr>
+				</thead>
+				<tbody>
+					{% for country_name, case_count, case_count_per_capita, death_count in countries %}
+						<tr class="left-table-row">
+							<td><b>{{ country_name }}</b></td>
+							<td>{{ case_count }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 header-text">
+			<h1 class="">COVID-19 Dashboard</h1>
+			<ul>
+				<li><a href=''>HOME</a></li>
+				<li><a href='about'>ABOUT</a></li>
+				<li><a href='faq'>FAQ</a></li>
+				<li><a href='contact'>CONTACT</a></li>
+			</ul>
+			<div class="map-container">
+				<div class="card-body plotly worldmap">
+					<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.54.6/plotly.min.js"></script>
+					<div class="chart">
+						{% autoescape off %}
+						{{ world_map }}
+						{% endautoescape %}
 					</div>
 				</div>
 			</div>
-		</main>
+		</div>
+	</div>
+</main>
+{% endblock content %}
 
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<script src="{% static 'dashboard/main.js' %}"></script>   
-	</body>
-</html>
+{% block javascripts %}
+<script src="{% static 'dashboard/main.js' %}"></script>
+{% endblock javascripts %}
