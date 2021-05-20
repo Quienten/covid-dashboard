@@ -1,69 +1,102 @@
-# File for creation of plotly maps(figs).
-# You can use the plotly builtin fig.show() method to map locally.
-import json
 from urllib.request import urlopen
+import json
 
 import plotly.graph_objs as go
 from plotly.offline import plot
 
-import pandas as pd
+def world_map(data):
+	with urlopen('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json') as response:
+		world_countries = json.load(response)
 
-def usa_counties():
-    """[summary]: Returns live cases of USA at county-level
-    
-    source:
-        ³ nytimes
-    Returns:
-        [pd.DataFrame]
-    """
-    populations = pd.read_csv('https://raw.githubusercontent.com/balsama/us_counties_data/master/data/counties.csv')[['FIPS Code', 'Population', 'State']]
-    populations.rename(columns={'FIPS Code': 'fips'}, inplace=True)
-    populations.drop(populations.index[(populations["State"] == "New York")],axis=0,inplace=True)
-    df = pd.read_csv('https://raw.githubusercontent.com/nytimes/covid-19-data/master/live/us-counties.csv', dtype={"fips": str}).iloc[:,:6]
-    df = pd.merge(df, populations, on='fips')
-    df['cases/capita'] = (df.cases / df.Population)*100000 # per 100k residents
+	figure = go.Figure(
+		go.Choroplethmapbox(
+			geojson = world_countries, 
+			locations = data.iso_code,
+			z = data.total_cases,
+			marker_opacity = 0.75,
+			marker_line_width = 0,
+            colorbar_title = 'Total Cases',
+			colorscale='Viridis',
+            text=data['text'], # hover text
+            hoverinfo='text'
+		)
+	)
 
-    return df
+	figure.update_layout(
+		mapbox_style = 'carto-positron', 
+		paper_bgcolor='rgba(0,0,0,0)', 
+		mapbox_zoom=2.75, 
+		mapbox_center = {'lat': 37.0902, 'lon': -95.7129}, 
+		margin = dict(t=0, l=0, r=0, b=0)
+	)
 
+	# Add dropdowns
+	button_layer_1_height = 1.12
+	figure.update_layout(
+		updatemenus=[
+			dict(
+				buttons=list([
+					dict(
+						args=["colorscale", "Viridis"],
+						label="Viridis",
+						method="restyle"
+					),
+					dict(
+						args=["colorscale", "Cividis"],
+						label="Cividis",
+						method="restyle"
+					),
+					dict(
+						args=["colorscale", "Blues"],
+						label="Blues",
+						method="restyle"
+					),
+					dict(
+						args=["colorscale", "Greens"],
+						label="Greens",
+						method="restyle"
+					),
+				]),
+				direction="down",
+				pad={"r": 10, "t": 10},
+				showactive=True,
+				x=0.053,
+				xanchor="left",
+				y=button_layer_1_height,
+				yanchor="top"
+			),
+			dict(
+				buttons=list([
+					dict(
+						args=["reversescale", False],
+						label="False",
+						method="restyle"
+					),
+					dict(
+						args=["reversescale", True],
+						label="True",
+						method="restyle"
+					)
+				]),
+				direction="down",
+				pad={"r": 10, "t": 10},
+				showactive=True,
+				x=0.21,
+				xanchor="left",
+				y=button_layer_1_height,
+				yanchor="top"
+			)
+		]
+	)
 
-def usa_map():
-    # Map of USA subdivided by FIPS-codes (counties), showing cases per-capita basis
-    # Reference: https://plotly.com/python/reference/#choroplethmapbox
-    with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
-        counties = json.load(response)
+	figure.update_layout(
+    annotations=[
+        dict(text="Colorscale:", x=0, xref="paper", y=1.083, yref="paper",
+                             align="left", showarrow=False),
+        dict(text="Reverse Colorscale:", x=0.12, xref="paper", y=1.083,
+                             yref="paper", showarrow=False)
+    ])
 
-    df = usa_counties()
-    df.drop([2311], inplace=True)
-    #print(df[2311])
+	world_map_html = plot(figure, include_plotlyjs=False, output_type='div', config={'displayModeBar': False})
 
-    fig = go.Figure(
-        go.Choroplethmapbox(
-            geojson = counties, 
-            locations = df.fips,
-            z = df['cases/capita'],
-            marker_opacity = 0.75,
-            marker_line_width = 0,
-            colorscale = [
-                [0, '#000000'],
-                [(1/8)*1, '#FF0000'],
-                [(1/8)*2, '#00FF00'],
-                [(1/8)*3, '#0000FF'],
-                [(1/8)*4, '#FFFF00'],
-                [(1/8)*5, '#00FFFF'],
-                [(1/8)*6, '#FF00FF'],
-                [(1/8)*7, '#FF0000'],
-                [1, '#FFFFFF']
-            ]
-        )
-    )
-
-    fig.update_layout(
-        mapbox_style = 'carto-positron', 
-        paper_bgcolor='rgba(0,0,0,0)', 
-        mapbox_zoom=2.75, 
-        mapbox_center = {'lat': 37.0902, 'lon': -95.7129}, 
-        margin = dict(t=0, l=0, r=0, b=0)
-    )
-    plot_div = plot(fig, include_plotlyjs=False, output_type='div', config={'displayModeBar': False})
-
-    return plot_div
+	return world_map_html
