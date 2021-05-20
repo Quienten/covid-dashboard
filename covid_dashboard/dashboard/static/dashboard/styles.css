@@ -1,19 +1,15 @@
 body {
-    
+    overflow-x: hidden;
 }
 
 .sidebar {
     overflow-y: scroll;
+    max-width: 325px;
     height: 97vh;
 }
 
 .sidebar table {
     width: 105%;
-}
-
-.map {
-    padding: 20px;
-    height: 97vh;
 }
 
 .big-case-count {
@@ -22,5 +18,14 @@ body {
     width: 100%;
     min-height: 100px;
     height: 100px;
+    text-align: center;
+}
+
+.header-text {
+    padding: 20px;
+    width: 100%;
+}
+
+.header-text h1 {
     text-align: center;
 }

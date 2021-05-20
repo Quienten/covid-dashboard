@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from . import maps
+
 # Create your views here.
 
 def index(request):
@@ -33,5 +35,9 @@ def index(request):
         ["India",12000000,111,222],
         ["Bottom",5000000,63,22]
     ]
-    context = {'countries': countries}
+    usa_map = maps.usa_map()
+    context = {
+        'countries': countries,
+        'usa_map': usa_map
+    }
     return render(request, 'dashboard/index.html', context)
