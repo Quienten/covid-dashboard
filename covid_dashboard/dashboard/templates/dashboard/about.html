@@ -1,0 +1,58 @@
+{% extends 'dashboard/layouts/base.html' %}
+
+{% load static %}
+
+{% block title %} About {% endblock title %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'dashboard/styles.css' %}">
+{% endblock stylesheets %}
+
+{% block content %}
+<main>
+	<div class="header-text">
+		<h1 class="">About This Site</h1>
+	</div>
+	<ul class="nav">
+		<li><a href='./'>HOME</a></li>
+		<li><a href='about'>ABOUT</a></li>
+		<li><a href='faq'>FAQ</a></li>
+		<li><a href='contact'>CONTACT</a></li>
+	</ul>
+	<div class="about-container">
+		<p>
+			Covid Dashboard is a product in the form of a website. it acts as a central hub to those 
+			looking for a broad global understanding and a specific local understanding of the on-going 
+			coronavirus. The main page, the dashboard, contains a world map for the user to peruse stats 
+			relating to geographical location such as: cases, recoveries, and deaths. The website is 
+			self-sufficient, updating its statistics at least every twenty-four hours. A 
+			Frequently-Asked-Questions (FAQ) page, an about page, and a contact page are also available. 
+		</p>
+		<p>
+			I decided to make this because of a few reasons. First, the existing dashboards could use 
+			some touch-up, I think a choropleth map would be much more suited to show case data than 
+			circles with relative circumferences. Second, I needed a way to connect my passion, computer 
+			science, to literature so I could write about it for English class, and what better way to 
+			do that to code a website designed for a on-going global pandemic. Third, I need more items 
+			in my computer science portfolio to showcase. 
+		</p>
+		<p>
+			After I made the decision of what I wanted to do, I had to make decisions on how to do it. 
+			Since this would be a website I already knew the abstract process on how this would work: a 
+			user accesses the website through a URL, my backend server would handle their request and 
+			send them the page and data they need to run the dashboard. Now that raises one major 
+			question to answer: “How do I obtain this “data”, how will I transcribe it onto the map, 
+			and what is the most effective way to store and send it to an end-user?”, my answer: 
+			I will use  Django, a Python-based web-server backend library that I am already comfortable 
+			with, and appeal to readily-available open source code to see the most effective way to go 
+			about this. After setting up a basic development environment I found plotly, a library 
+			designed to take data and plot it onto all kinds of maps. I now have all the pieces in the 
+			puzzle, I just need to do the hard part, piece them together. 
+		</p>
+	</div>
+</main>
+{% endblock content %}
+
+{% block javascripts %}
+
+{% endblock javascripts %}

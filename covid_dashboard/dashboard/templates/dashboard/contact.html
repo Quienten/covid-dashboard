@@ -1,0 +1,41 @@
+{% extends 'dashboard/layouts/base.html' %}
+
+{% load static %}
+
+{% block title %} About {% endblock title %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'dashboard/styles.css' %}">
+{% endblock stylesheets %}
+
+{% block content %}
+<main>
+	<div class="header-text">
+		<h1 class="">About This Site</h1>
+	</div>
+	<ul class="nav">
+		<li><a href='./'>HOME</a></li>
+		<li><a href='about'>ABOUT</a></li>
+		<li><a href='faq'>FAQ</a></li>
+		<li><a href='contact'>CONTACT</a></li>
+	</ul>
+	<div class="contact-container">
+		<p>
+			You can contact me through quientenmiller2&lt;at&gt;gmail&lt;dot&gt;com.<br>
+            Or alternatively, you can use the contact form below!
+		</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-actions">
+                <button type="submit">Send</button>
+            </div>
+        </form>
+	</div>
+    
+</main>
+{% endblock content %}
+
+{% block javascripts %}
+
+{% endblock javascripts %}
