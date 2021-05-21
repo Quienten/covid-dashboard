@@ -44,14 +44,10 @@
 				<li><a href='contact'>CONTACT</a></li>
 			</ul>
 			<div class="map-container">
-				<div class="card-body plotly worldmap">
-					<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.54.6/plotly.min.js"></script>
-					<div class="chart">
-						{% autoescape off %}
-						{{ world_map }}
-						{% endautoescape %}
-					</div>
-				</div>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.54.6/plotly.min.js"></script>
+				{% autoescape off %}
+				{{ world_map }}
+				{% endautoescape %}
 			</div>
 		</div>
 	</div>

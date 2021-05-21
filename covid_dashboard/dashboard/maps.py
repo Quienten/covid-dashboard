@@ -30,8 +30,22 @@ def world_map(data):
 		margin = dict(t=0, l=0, r=0, b=0)
 	)
 
+	# Update plot sizing
+	figure.update_layout(
+		width=1000,
+		height=600,
+		autosize=True,
+		margin=dict(t=100, b=0, l=0, r=0),
+	)
+
+	# Update 3D scene options
+	figure.update_scenes(
+		aspectratio=dict(x=1, y=1, z=0.7),
+		aspectmode="manual"
+	)
+
 	# Add dropdowns
-	button_layer_1_height = 1.12
+	button_layer_1_height = 1.10
 	figure.update_layout(
 		updatemenus=[
 			dict(
@@ -60,7 +74,7 @@ def world_map(data):
 				direction="down",
 				pad={"r": 10, "t": 10},
 				showactive=True,
-				x=0.053,
+				x=0.09,
 				xanchor="left",
 				y=button_layer_1_height,
 				yanchor="top"
@@ -81,7 +95,7 @@ def world_map(data):
 				direction="down",
 				pad={"r": 10, "t": 10},
 				showactive=True,
-				x=0.21,
+				x=0.35,
 				xanchor="left",
 				y=button_layer_1_height,
 				yanchor="top"
@@ -91,12 +105,13 @@ def world_map(data):
 
 	figure.update_layout(
     annotations=[
-        dict(text="Colorscale:", x=0, xref="paper", y=1.083, yref="paper",
+        dict(text="Colorscale:", x=0, xref="paper", y=1.07, yref="paper",
                              align="left", showarrow=False),
-        dict(text="Reverse Colorscale:", x=0.12, xref="paper", y=1.083,
+        dict(text="Reverse Colorscale:", x=0.2, xref="paper", y=1.07,
                              yref="paper", showarrow=False)
     ])
 
 	world_map_html = plot(figure, include_plotlyjs=False, output_type='div', config={'displayModeBar': False})
+	#world_map_html = figure.to_html(full_html=False, default_width=2000, default_height=720)
 
 	return world_map_html
