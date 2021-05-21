@@ -24,6 +24,7 @@ SECRET_KEY = '%wq@+t^w@wl18kezyqs-f3itlgk9yoj$yqxze+6(6d5e^+j8jh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ENABLE_CACHING = True
 
 ALLOWED_HOSTS = []
 
@@ -59,6 +60,8 @@ MIDDLEWARE = [
 #CACHING
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = (60 * 60) * 24 #24 hours cache expiration
+if(not ENABLE_CACHING):
+    CACHE_MIDDLEWARE_SECONDS = 1
 CACHE_MIDDLEWARE_KEY_PREFIX = ''
 
 ROOT_URLCONF = 'covid_dashboard.urls'
