@@ -1,26 +1,112 @@
 body {
-    
+	overflow-x: hidden;
 }
 
 .sidebar {
-    overflow-y: scroll;
-    height: 97vh;
+	overflow-y: scroll;
+	max-width: 325px;
+	height: 97vh;
 }
 
 .sidebar table {
-    width: 105%;
-}
-
-.map {
-    padding: 20px;
-    height: 97vh;
+	width: 105%;
 }
 
 .big-case-count {
-    padding-top: 20px;
-    margin-bottom: 20px;
-    width: 100%;
-    min-height: 100px;
-    height: 100px;
-    text-align: center;
+	padding-top: 20px;
+	margin-bottom: 20px;
+	width: 100%;
+	min-height: 100px;
+	height: 100px;
+	text-align: center;
+}
+
+.header-text {
+	padding: 20px;
+	width: 100%;
+}
+
+.header-text h1 {
+	text-align: center;
+}
+
+.nav {
+	border:1px solid #ccc;
+	border-width:1px 0;
+	list-style:none;
+	margin:auto;
+	padding:0;
+	text-align:center;
+	width: 33%;
+	max-width: 510px;
+}
+.nav li {
+	display:inline;
+	margin: auto;
+}
+.nav li a {
+	display:inline-block;
+	padding:10px;
+	color:#c00;
+	text-decoration:none;
+	font-weight:bold;
+}
+.nav li a:hover {
+	text-decoration:underline;
+}
+
+.about-container {
+	margin: auto;
+	padding-top: 50px;
+	width: 33%;
+}
+
+.about-container p {
+	text-indent: 2rem;
+}
+
+.faq-container {
+	margin: auto;
+	padding-top: 50px;
+	width: 33%;
+	font-size: 24px;
+}
+
+.faq-container ul {
+	list-style: none;
+}
+
+.faq-container ul li {
+	margin-bottom: 30px;
+}
+
+.question {
+	font-weight: bold;
+}
+
+.question::before {
+	content: "Q: ";
+	font-weight: bold;
+	color:#c00;
+}
+
+.answer::before {
+	content: "A: ";
+	font-weight: bold;
+	color:#a00;
+}
+
+.tech-list {
+	list-style: circle !important;
+}
+
+.tech-list li {
+	margin: 0 !important;
+}
+
+.contact-container {
+	margin: auto;
+	padding-top: 50px;
+	width: 33%;
+	font-size: 24px;
 }

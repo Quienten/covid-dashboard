@@ -1,0 +1,64 @@
+{% extends 'dashboard/layouts/base.html' %}
+
+{% load static %}
+
+{% block title %} FAQ {% endblock title %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'dashboard/styles.css' %}">
+{% endblock stylesheets %}
+
+{% block content %}
+<main>
+	<div class="header-text">
+		<h1 class="">Frequently Asked Questions (FAQ)</h1>
+	</div>
+	<ul class="nav">
+		<li><a href='./'>HOME</a></li>
+		<li><a href='about'>ABOUT</a></li>
+		<li><a href='faq'>FAQ</a></li>
+		<li><a href='contact'>CONTACT</a></li>
+	</ul>
+	<div class="faq-container">
+		<ul>
+            <li>
+                <span class="question">What is this?</span><br>
+                <span class="answer">
+                    COVID-19 Dashboard acts as a central hub to those 
+			        looking for a broad global understanding and a specific local understanding of 
+                    the on-going coronavirus. Find more info on the <a href='about'>about</a> page
+                </span>
+            </li>
+            <li>
+                <span class="question">What technologies were used to create this?</span><br>
+                <span class="answer">
+                    <ul class="tech-list">
+                        <li>Python</li>
+                        <li>Django</li>
+                        <li>Plotly</li>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>Javascript</li>
+                    </ul>
+                </span>
+            </li>
+            <li>
+                <span class="question">Where's the source code?</span><br>
+                <span class="answer">
+                    Available on <a href="https://github.com/Quienten/covid-dashboard">GitHub</a>
+                </span>
+            </li>
+            <li>
+                <span class="question">Who made this?</span><br>
+                <span class="answer">
+                    Quienten Miller. Contact him <a href='contact'>here</a>.
+                </span>
+            </li>
+        </ul>
+	</div>
+</main>
+{% endblock content %}
+
+{% block javascripts %}
+
+{% endblock javascripts %}
