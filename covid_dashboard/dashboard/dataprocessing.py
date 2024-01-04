@@ -5,7 +5,7 @@ from urllib.request import urlopen
 import pandas as pd
 
 def world_map_data():
-	url = 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv'
+	url = 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data-old.csv'
 	df = pd.read_csv(url)[['iso_code', 'location', 'population', 'total_cases', 'total_deaths']]
 
 	df = df.drop_duplicates(subset=['iso_code'], keep='last') #Remove multiple data points
